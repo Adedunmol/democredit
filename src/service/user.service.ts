@@ -4,7 +4,10 @@ import bcrypt from 'bcrypt'
 export const createUserService = async (data: any) => {
     const { email, username, password } = data
 
-    return userModel.createUser({ email, username, password })
+    const salt = await bcrypt.genSalt(10)
+    const hashedPassword = await bcrypt.hash(password, salt)
+
+    return userModel.createUser({ email, username, password: hashedPassword })
 }
 
 
