@@ -16,3 +16,5 @@ class User {
         return id
     }
 }
+
+export default new User()
