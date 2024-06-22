@@ -1,0 +1,19 @@
+{
+  "name": "democredit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "tsc": "typescript"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.5.2"
+  },
+  "dependencies": {
+    "knex": "^3.1.0",
+    "mysql": "^2.18.1"
+  }
+}
