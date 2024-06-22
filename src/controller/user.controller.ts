@@ -1,7 +1,8 @@
 import { Response, Request } from 'express'
 import { createUserService } from '../service/user.service'
+import { CreateUserInput } from '../schema/user.schema'
 
-export const createUserController = async (req: Request, res: Response) => {
+export const createUserController = async (req: Request<{}, {}, CreateUserInput['body']>, res: Response) => {
     try {
         const id = await createUserService(req.body)
 
