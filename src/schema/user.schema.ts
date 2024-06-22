@@ -12,4 +12,13 @@ export const createUserSchema = object({
     })
 })
 
+
+export const loginSchema = object({
+    body: object({
+        email: string({ required_error: 'email is required' }),
+        password: string({ required_error: 'password is required' })
+    })
+})
+
 export type CreateUserInput = Omit<TypeOf<typeof createUserSchema>, 'body.passwordConfirmation'>
+export type LoginUserInput = TypeOf<typeof loginSchema>

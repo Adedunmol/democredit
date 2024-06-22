@@ -14,6 +14,12 @@ class User {
 
         return id
     }
+
+    async findUser(email: string) {
+        const user = await db('user').where({ email })
+
+        return user[0]
+    }
 }
 
 export default new User()
