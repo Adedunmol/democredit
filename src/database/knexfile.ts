@@ -4,7 +4,7 @@ import type { Knex } from "knex";
 
 const config: { [key: string]: Knex.Config } = {
   development: {
-    client: 'mysql',
+    client: 'mysql2',
     connection: {
       database: process.env.DATABASE_NAME,
       user: process.env.DATABASE_USER,
