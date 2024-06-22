@@ -9,12 +9,30 @@ interface FundAccount {
     amount: number
 }
 
+interface FundTransfer {
+    user_id: string
+    amount: number
+}
+
+interface WithdrawFunds {
+    user_id: string
+    amount: number
+}
+
 class Account {
-    async createAccout(data: CreateAccount) {
+    async createAccount(data: CreateAccount) {
 
     }
 
     async fundAccount(data: FundAccount) {
+
+    }
+
+    async transferFunds(data: FundTransfer) {
+
+    }
+
+    async withdrawFunds(data: WithdrawFunds) {
 
     }
 }
