@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "migrate": "npx knex migrate:latest --knexfile src/database/knexfile.ts",
+    "rollback:all": "npx knex migrate:rollback --all --knexfile src/database/knexfile.ts",
     "tsc": "typescript"
   },
   "keywords": [],
