@@ -1,26 +1,22 @@
 import db from "../database/database";
 
 interface CreateAccount {
-    user_id: string
-}
-
-interface GetAccount {
-    user_id: string
+    user_id: number
 }
 
 interface FundAccount {
-    user_id: string
+    user_id: number
     amount: number
 }
 
 interface FundTransfer {
-    senderUserId: string
-    recipientUserId: string
+    senderUserId: number
+    recipientUserId: number
     amount: number
 }
 
 interface WithdrawFunds {
-    user_id: string
+    user_id: number
     amount: number
 }
 
@@ -54,8 +50,8 @@ class Account {
         return account
     }
 
-    async getAccount(data: GetAccount) {
-        const account = db('account').where({ user_id: data.user_id }).returning('*').first()
+    async getAccount(userId: number) {
+        const account = db('account').where({ user_id: userId }).returning('*').first()
 
         return account
     }
