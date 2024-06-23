@@ -1,4 +1,5 @@
 import db from "../database/database";
+import accountModel from "./account.model";
 
 interface CreateUser {
     email: string
@@ -12,7 +13,9 @@ class User {
             ...data
         }).returning('id')
 
-        return id
+        const accountId = await accountModel.createAccount({ user_id: id })
+
+        return { userId: id, accountId }
     }
 
     async findUser(email: string) {
