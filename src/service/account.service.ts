@@ -1,5 +1,11 @@
 import accountModel from "../models/account.model"
 
+export const createAccountService = async (data: any) => {
+    const { userId: user_id } = data
+
+    return accountModel.createAccount({ user_id })
+}
+
 export const fundAccountService = async (data: any) => {
     const { userId: user_id, amount } = data
 
