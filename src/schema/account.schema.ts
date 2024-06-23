@@ -7,4 +7,4 @@ export const fundAccountSchema = object({
     })
 })
 
-export type FuncAccountInput = TypeOf<typeof fundAccountSchema>
+export type FundAccountInput = TypeOf<typeof fundAccountSchema>

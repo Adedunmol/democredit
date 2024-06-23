@@ -27,7 +27,9 @@ class Account {
     }
 
     async fundAccount(data: FundAccount) {
+        const account = await db('account').increment('balance', data.amount).where({ user_id: data.user_id }).returning('*').first()
 
+        return account
     }
 
     async transferFunds(data: FundTransfer) {
