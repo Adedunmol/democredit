@@ -2,9 +2,16 @@ import { Response, Request } from 'express'
 import { createUserService, validatePassword } from '../service/user.service'
 import { CreateUserInput, LoginUserInput } from '../schema/user.schema'
 import jwt from 'jsonwebtoken'
+import karma from '../adjutor/index'
 
 export const createUserController = async (req: Request<{}, {}, CreateUserInput['body']>, res: Response) => {
     try {
+        const userOnBlacklist = await karma.isOnBlacklist(req.body.email)
+
+        if (userOnBlacklist) {
+            return res.status(400).json({ status: 'error', message: 'this user has been blacklisted', data: null })
+        }
+
         const id = await createUserService(req.body)
 
         return res.status(201).json({ status: 'success', message: '',  data: { id } })
