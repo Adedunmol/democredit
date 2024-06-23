@@ -10,7 +10,8 @@ interface FundAccount {
 }
 
 interface FundTransfer {
-    user_id: string
+    senderUserId: string
+    recipientUserId: string
     amount: number
 }
 
@@ -33,7 +34,14 @@ class Account {
     }
 
     async transferFunds(data: FundTransfer) {
+        const sender = await db.transaction(async trx => {
+            const sender = await trx('account').decrement('balance', data.amount).where({ user_id: data.senderUserId }).returning('*').first()
+            const receiver = await trx('account').increment('balance', data.amount).where({ user_id: data.recipientUserId }).returning('*').first()
 
+            return sender
+        })
+
+        return sender
     }
 
     async withdrawFunds(data: WithdrawFunds) {
