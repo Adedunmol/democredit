@@ -37,7 +37,9 @@ class Account {
     }
 
     async withdrawFunds(data: WithdrawFunds) {
+        const account = await db('account').decrement('balance', data.amount).where({ user_id: data.user_id }).returning('*').first()
 
+        return account
     }
 }
 
