@@ -1,3 +1,4 @@
+import { InsuffucientBalanceError } from "../errors/account"
 import accountModel from "../models/account.model"
 
 class AccountService {
@@ -20,7 +21,7 @@ class AccountService {
         const account = await accountModel.getAccount(senderUserId)
     
         // custom error insufficient balance
-        if (account && amount > account.balance) throw new Error('Insuffucient balance')
+        if (account && amount > account.balance) throw new InsuffucientBalanceError()
     
         return accountModel.transferFunds({ senderUserId, recipientUserId, amount })
     }
@@ -30,7 +31,7 @@ class AccountService {
     
         const account = await accountModel.getAccount(user_id)
     
-        if (account && amount > account.balance) throw new Error('Insuffucient balance')
+        if (account && amount > account.balance) throw new InsuffucientBalanceError()
     
         return accountModel.withdrawFunds({ user_id, amount })
     }
