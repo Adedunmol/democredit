@@ -13,7 +13,7 @@ describe('account', () => {
 
                 const payload = { amount: -100 }
 
-                const { statusCode } = await supertest(app).post('/api/v1/accounts/fund/').send(payload).set('Authorization', `Bearer ${token}`)
+                const { statusCode } = await supertest(app).post('/api/v1/accounts/fund').send(payload).set('Authorization', `Bearer ${token}`)
 
                 expect(statusCode).toBe(400)
             })
@@ -26,7 +26,7 @@ describe('account', () => {
 
                 const payload = { amount: -100 }
 
-                const { statusCode } = await supertest(app).post('/api/v1/accounts/fund/').send(payload)
+                const { statusCode } = await supertest(app).post('/api/v1/accounts/fund').send(payload)
 
                 expect(statusCode).toBe(401)
             })
@@ -43,7 +43,7 @@ describe('account', () => {
 
                 const payload = { amount: 100 }
 
-                const { statusCode } = await supertest(app).post('/api/v1/accounts/fund/').send(payload).set('Authorization', `Bearer ${token}`)
+                const { statusCode } = await supertest(app).post('/api/v1/accounts/fund').send(payload).set('Authorization', `Bearer ${token}`)
 
                 expect(statusCode).toBe(200)
                 expect(accountModelMock).toHaveBeenCalled()
@@ -59,7 +59,7 @@ describe('account', () => {
 
                 const payload = { amount: -100, recipientUserId: 2 }
 
-                const { statusCode } = await supertest(app).post('/api/v1/accounts/transfer/').send(payload).set('Authorization', `Bearer ${token}`)
+                const { statusCode } = await supertest(app).post('/api/v1/accounts/transfer').send(payload).set('Authorization', `Bearer ${token}`)
 
                 expect(statusCode).toBe(400)
             })
@@ -77,7 +77,7 @@ describe('account', () => {
 
                 const payload = { amount: 150, recipientUserId: 2 }
 
-                const { statusCode } = await supertest(app).post('/api/v1/accounts/transfer/').send(payload).set('Authorization', `Bearer ${token}`)
+                const { statusCode } = await supertest(app).post('/api/v1/accounts/transfer').send(payload).set('Authorization', `Bearer ${token}`)
 
                 expect(statusCode).toBe(400)
                 expect(getAccountMock).toHaveBeenCalled()
@@ -99,7 +99,7 @@ describe('account', () => {
 
                 const payload = { amount: 100, recipientUserId: 2 }
 
-                const { statusCode } = await supertest(app).post('/api/v1/accounts/transfer/').send(payload).set('Authorization', `Bearer ${token}`)
+                const { statusCode } = await supertest(app).post('/api/v1/accounts/transfer').send(payload).set('Authorization', `Bearer ${token}`)
 
                 expect(statusCode).toBe(200)
                 expect(getAccountMock).toHaveBeenCalled()
@@ -116,7 +116,7 @@ describe('account', () => {
 
                 const payload = { amount: -100, recipientUserId: 2 }
 
-                const { statusCode } = await supertest(app).post('/api/v1/accounts/withdraw/').send(payload).set('Authorization', `Bearer ${token}`)
+                const { statusCode } = await supertest(app).post('/api/v1/accounts/withdraw').send(payload).set('Authorization', `Bearer ${token}`)
 
                 expect(statusCode).toBe(400)
             })
@@ -133,7 +133,7 @@ describe('account', () => {
 
                 const payload = { amount: 150, recipientUserId: 2 }
 
-                const { statusCode } = await supertest(app).post('/api/v1/accounts/withdraw/').send(payload).set('Authorization', `Bearer ${token}`)
+                const { statusCode } = await supertest(app).post('/api/v1/accounts/withdraw').send(payload).set('Authorization', `Bearer ${token}`)
 
                 expect(statusCode).toBe(400)
                 expect(getAccountMock).toHaveBeenCalled()
@@ -154,7 +154,7 @@ describe('account', () => {
 
                 const payload = { amount: 100, recipientUserId: 2 }
 
-                const { statusCode } = await supertest(app).post('/api/v1/accounts/withdraw/').send(payload).set('Authorization', `Bearer ${token}`)
+                const { statusCode } = await supertest(app).post('/api/v1/accounts/withdraw').send(payload).set('Authorization', `Bearer ${token}`)
 
                 expect(statusCode).toBe(200)
                 expect(getAccountMock).toHaveBeenCalled()

@@ -9,6 +9,6 @@ app.use(express.json())
 app.use('/api/v1/auth', userRouter)
 
 app.use(verifyJWT)
-app.use('api/v1/accounts', accountRouter)
+app.use('/api/v1/accounts', accountRouter)
 
 export default app
