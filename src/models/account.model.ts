@@ -22,7 +22,7 @@ interface WithdrawFunds {
 
 class Account {
     async createAccount(data: CreateAccount) {
-        const [id] = await db('account').insert({ ...data }).returning('id')
+        const [id] = await db('account').insert({ ...data, balance: 0 }).returning('id')
 
         return id
     }
