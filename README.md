@@ -40,6 +40,8 @@ git clone https://github.com/Adedunmol/democredit.git
 ```
 2. Run npm install to install all dependencies
 
+### Running tests
+* Run `npm run test` to run unit tests.
 
 ### Setting up environments
 1. There is a file named `.env.example` on the root directory of the project
@@ -51,7 +53,7 @@ git clone https://github.com/Adedunmol/democredit.git
 * Run `npm run dev` to start the application.
 * Connect to the API using Postman on port 3000.
 
-## API endpoints:
+### API endpoints:
 
 #### *Indication*
 - [x] **Authentication required**
