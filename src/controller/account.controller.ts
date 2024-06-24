@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { FundAccountInput, TransferFundsInput, WithdrawFundsInput } from "../schema/account.schema";
 import accountService from "../service/account.service";
-import { InsuffucientBalanceError } from "../errors/account";
+import { InsuffucientBalanceError } from "../errors/insufficient-balance";
 
 
 export const fundAccountController = async (req: Request<{}, {}, FundAccountInput['body']>, res: Response) => {

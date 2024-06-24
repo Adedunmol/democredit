@@ -1,4 +1,4 @@
-import { InsuffucientBalanceError } from "../errors/account"
+import { InsuffucientBalanceError } from "../errors/insufficient-balance"
 import accountModel from "../models/account.model"
 
 class AccountService {
