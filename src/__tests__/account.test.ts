@@ -36,7 +36,7 @@ describe('account', () => {
             it('should return a 200', async () => {
                 const account = { id: 1, balance: 100, user_id: 1 }
                 const accountModelMock = jest.spyOn(accountModel, 'fundAccount')
-                                .mockResolvedValueOnce(account)
+                                .mockResolvedValueOnce([account])
 
                 const userPayload = { id: 1, email: 'test@email.com', username: 'test_username' }
                 const token = jwt.sign({ UserInfo: { ...userPayload }}, process.env.ACCESS_TOKEN_SECRET as string, { expiresIn: '15m' })
@@ -92,7 +92,7 @@ describe('account', () => {
                 .mockResolvedValueOnce(account)
 
                 const transferMock = jest.spyOn(accountModel, 'transferFunds')
-                .mockResolvedValueOnce({ ...account, balance: 0 })
+                .mockResolvedValueOnce([{ ...account, balance: 0 }])
 
                 const userPayload = { id: 1, email: 'test@email.com', username: 'test_username' }
                 const token = jwt.sign({ UserInfo: { ...userPayload }}, process.env.ACCESS_TOKEN_SECRET as string, { expiresIn: '15m' })
@@ -147,7 +147,7 @@ describe('account', () => {
                 .mockResolvedValueOnce(account)
 
                 const withdrawMock = jest.spyOn(accountModel, 'withdrawFunds')
-                .mockResolvedValueOnce({ ...account, balance: 0 })
+                .mockResolvedValueOnce([{ ...account, balance: 0 }])
 
                 const userPayload = { id: 1, email: 'test@email.com', username: 'test_username' }
                 const token = jwt.sign({ UserInfo: { ...userPayload }}, process.env.ACCESS_TOKEN_SECRET as string, { expiresIn: '15m' })
