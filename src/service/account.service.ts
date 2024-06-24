@@ -25,5 +25,9 @@ export const transferFundsService = async (data: any) => {
 export const withdrawFundsService = async (data: any) => {
     const { userId: user_id, amount } = data
 
+    const account = await accountModel.getAccount(user_id)
+
+    if (account && amount > account.balance) throw new Error('Insuffucient balance')
+
     return accountModel.withdrawFunds({ user_id, amount })
 }
