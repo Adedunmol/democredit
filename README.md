@@ -71,4 +71,4 @@ git clone https://github.com/Adedunmol/democredit.git
 ### Future Improvements
 1. Add a Swagger.yaml file to document the APIs
 2. Add a logger to handle formatted logs. instead of using console.log which does not provide much information.
-3. At the moment, the current implementation only allows one user id per account, further improvements will allow users to have multiple accounts. This will allow users to send funds to other accounts, which the current logic doesn't cater for.
+3. At the moment, the current implementation only allows one user id per account, further improvements will allow users to have multiple accounts. This will allow users to send funds to their other accounts, which the current logic doesn't cater for.
