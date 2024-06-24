@@ -35,6 +35,7 @@ class Account {
 
     async transferFunds(data: FundTransfer) {
         const sender = await db.transaction(async trx => {
+            // account id instead
             const sender = await trx('account').decrement('balance', data.amount).where({ user_id: data.senderUserId }).returning('*')
             const receiver = await trx('account').increment('balance', data.amount).where({ user_id: data.recipientUserId }).returning('*')
 
@@ -45,6 +46,7 @@ class Account {
     }
 
     async withdrawFunds(data: WithdrawFunds) {
+        // account id instead
         const account = await db('account').decrement('balance', data.amount).where({ user_id: data.user_id }).returning('*')
 
         return account
