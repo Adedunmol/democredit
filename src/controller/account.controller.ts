@@ -5,7 +5,8 @@ import { fundAccountService, transferFundsService, withdrawFundsService } from "
 
 export const fundAccountController = async (req: Request<{}, {}, FundAccountInput['body']>, res: Response) => {
     try {
-        const account = await fundAccountService(req.body)
+        // @ts-ignore
+        const account = await fundAccountService({ ...req.body, userId: req.user.id })
 
         return res.status(200).json({ status: 'success', message: 'account funded successfully', data: { account } })
     } catch (err: any) {

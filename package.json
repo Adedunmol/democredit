@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npm install && tsc",
+    "build": "npm install && npm run migrate && tsc",
     "start:prod": "node dist/index.js",
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "migrate": "npx knex migrate:latest --knexfile src/database/knexfile.ts",

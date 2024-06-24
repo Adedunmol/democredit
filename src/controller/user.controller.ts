@@ -16,7 +16,10 @@ export const createUserController = async (req: Request<{}, {}, CreateUserInput[
 
         return res.status(201).json({ status: 'success', message: '',  data: { id } })
     } catch (err: any) {
-        console.log(err)
+
+        if (err && err.code === 'ER_DUP_ENTRY') {
+            return res.status(409).json({ status: 'error', message: 'duplicate value entered', data: null })
+        }
         return res.status(400).json({ status: 'error', message: 'error creating user', data: null })
     }
 }
@@ -33,7 +36,7 @@ export const loginController = async (req: Request<{}, {}, LoginUserInput['body'
         const accessToken = jwt.sign(
             {
                 UserInfo: {
-                    id: user._id,
+                    id: user.id,
                 }
             },
             process.env.ACCESS_TOKEN_SECRET as string,
