@@ -16,7 +16,7 @@ interface FundTransfer {
 }
 
 interface WithdrawFunds {
-    user_id: number
+    account_id: number
     amount: number
 }
 
@@ -47,7 +47,7 @@ class Account {
 
     async withdrawFunds(data: WithdrawFunds) {
         // account id instead
-        const account = await db('account').decrement('balance', data.amount).where({ user_id: data.user_id }).returning('*')
+        const account = await db('account').decrement('balance', data.amount).where({ id: data.account_id }).returning('*')
 
         return account
     }

@@ -18,6 +18,7 @@ export const transferFundsSchema = object({
 
 export const withdrawFundsSchema = object({
     body: object({
+        accountId: number({ required_error: 'accountId is required' }),
         amount: number({ required_error: 'amount to be withdrawn is required' }).positive('amount to be withdrawn cannot be negative')
     })
 })

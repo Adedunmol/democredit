@@ -31,13 +31,17 @@ class AccountService {
     }
 
     async withdrawFunds(data: any) {
-        const { userId: user_id, amount } = data
+        const { accountId: account_id, amount, senderUserId } = data
     
-        const account = await accountModel.getAccount(user_id)
+        const account = await accountModel.getAccount(account_id)
+        
+        if (!account) throw new Error('No account with this account id')
+
+        if (account.user_id !== senderUserId) throw new Error('Account does not belong to sender')
     
-        if (account && amount > account.balance) throw new InsuffucientBalanceError()
+        if (amount > account.balance) throw new InsuffucientBalanceError()
     
-        return accountModel.withdrawFunds({ user_id, amount })
+        return accountModel.withdrawFunds({ account_id, amount })
     }
 }
 
