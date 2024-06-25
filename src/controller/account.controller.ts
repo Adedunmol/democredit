@@ -6,8 +6,7 @@ import { InsuffucientBalanceError } from "../errors/insufficient-balance";
 
 export const fundAccountController = async (req: Request<{}, {}, FundAccountInput['body']>, res: Response) => {
     try {
-        // @ts-ignore
-        const account = await accountService.fundAccount({ ...req.body, userId: req.user.id })
+        const account = await accountService.fundAccount({ ...req.body })
 
         return res.status(200).json({ status: 'success', message: 'account funded successfully', data: { account } })
     } catch (err: any) {

@@ -10,9 +10,9 @@ class AccountService {
     }
 
     fundAccount(data: any) {
-        const { userId: user_id, amount } = data
+        const { accountId: account_id, amount } = data
     
-        return accountModel.fundAccount({ user_id, amount })
+        return accountModel.fundAccount({ account_id, amount })
     }
 
     async transferFunds(data: any) {

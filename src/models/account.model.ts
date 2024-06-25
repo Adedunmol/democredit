@@ -5,7 +5,7 @@ interface CreateAccount {
 }
 
 interface FundAccount {
-    user_id: number
+    account_id: number
     amount: number
 }
 
@@ -28,7 +28,7 @@ class Account {
     }
 
     async fundAccount(data: FundAccount) {
-        const account = await db('account').increment('balance', data.amount).where({ user_id: data.user_id }).returning('*')
+        const account = await db('account').increment('balance', data.amount).where({ id: data.account_id }).returning('*')
 
         return account
     }

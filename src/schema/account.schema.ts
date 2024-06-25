@@ -3,6 +3,7 @@ import { object, TypeOf, number } from 'zod';
 
 export const fundAccountSchema = object({
     body: object({
+        accountId: number({ required_error: 'accountId is required' }),
         amount: number({ required_error: 'amount to be funded is required' }).positive('amount to be deposited cannot be negative')
     })
 })
