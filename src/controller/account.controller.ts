@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { FundAccountInput, TransferFundsInput, WithdrawFundsInput } from "../schema/account.schema";
 import accountService from "../service/account.service";
-import { InsufficientBalanceError } from "../errors/account";
+import { AccountNotFoundError, ForbiddenError, InsufficientBalanceError } from "../errors/account";
 
 
 export const fundAccountController = async (req: Request<{}, {}, FundAccountInput['body']>, res: Response) => {
@@ -27,6 +27,14 @@ export const transferFundsController = async (req: Request<{}, {}, TransferFunds
             return res.status(400).json({ status: 'error', message: err.message, data: null })
         }
 
+        if (err instanceof AccountNotFoundError) {
+            return res.status(404).json({ status: 'error', message: err.message, data: null })
+        }
+
+        if (err instanceof ForbiddenError) {
+            return res.status(403).json({ status: 'error', message: err.message, data: null })
+        }
+
         return res.status(500).json({ status: 'error', message: err.message, data: null })
     }
 }
@@ -40,6 +48,14 @@ export const withdrawFundsController = async (req: Request<{}, {}, WithdrawFunds
     } catch (err: any) {
         if (err instanceof InsufficientBalanceError) {
             return res.status(400).json({ status: 'error', message: err.message, data: null })
+        }
+        
+        if (err instanceof AccountNotFoundError) {
+            return res.status(404).json({ status: 'error', message: err.message, data: null })
+        }
+
+        if (err instanceof ForbiddenError) {
+            return res.status(403).json({ status: 'error', message: err.message, data: null })
         }
         
         return res.status(500).json({ status: 'error', message: err.message, data: null })
