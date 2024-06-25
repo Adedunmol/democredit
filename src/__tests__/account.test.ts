@@ -84,6 +84,27 @@ describe('account', () => {
             })
         })
 
+        describe('given account does not belong to user', () => {
+            it('should return a 403', async () => {
+                const account = { id: 1, balance: 100, user_id: 2 }
+
+                const getAccountMock = jest.spyOn(accountModel, 'getAccount')
+                .mockResolvedValueOnce(account)
+
+                const transferMock = jest.spyOn(accountModel, 'transferFunds')
+                .mockResolvedValueOnce([{ ...account, balance: 0 }])
+
+                const userPayload = { id: 1, email: 'test@email.com', username: 'test_username' }
+                const token = jwt.sign({ UserInfo: { ...userPayload }}, process.env.ACCESS_TOKEN_SECRET as string, { expiresIn: '15m' })
+
+                const payload = { amount: 100, recipientAccountId: 2, senderAccountId: 1 }
+
+                const { statusCode } = await supertest(app).post('/api/v1/accounts/transfer').send(payload).set('Authorization', `Bearer ${token}`)
+
+                expect(statusCode).toBe(403)
+                expect(getAccountMock).toHaveBeenCalled()
+            })
+        })
         describe('given the amount in account is equal or greater than amount to be transferred', () => {
             it('should return a 200', async () => {
                 const account = { id: 1, balance: 100, user_id: 1 }
@@ -136,6 +157,24 @@ describe('account', () => {
                 const { statusCode } = await supertest(app).post('/api/v1/accounts/withdraw').send(payload).set('Authorization', `Bearer ${token}`)
 
                 expect(statusCode).toBe(400)
+                expect(getAccountMock).toHaveBeenCalled()
+            })
+        })
+        describe('given account does not belong to user', () => {
+            it('should return a 403', async () => {
+                const account = { id: 1, balance: 150, user_id: 2 }
+
+                const getAccountMock = jest.spyOn(accountModel, 'getAccount')
+                .mockResolvedValueOnce(account)
+
+                const userPayload = { id: 1, email: 'test@email.com', username: 'test_username' }
+                const token = jwt.sign({ UserInfo: { ...userPayload }}, process.env.ACCESS_TOKEN_SECRET as string, { expiresIn: '15m' })
+
+                const payload = { amount: 150, accountId: 1 }
+
+                const { statusCode } = await supertest(app).post('/api/v1/accounts/withdraw').send(payload).set('Authorization', `Bearer ${token}`)
+
+                expect(statusCode).toBe(403)
                 expect(getAccountMock).toHaveBeenCalled()
             })
         })

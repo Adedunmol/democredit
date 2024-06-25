@@ -42,14 +42,14 @@ export const transferFundsController = async (req: Request<{}, {}, TransferFunds
 export const withdrawFundsController = async (req: Request<{}, {}, WithdrawFundsInput['body']>, res: Response) => {
     try {
         // @ts-ignore
-        const account = await accountService.withdrawFunds({ ...req.body, userId: req.user.id })
+        const account = await accountService.withdrawFunds({ ...req.body, senderUserId: req.user.id })
 
         return res.status(200).json({ status: 'success', message: 'withdraw successful', data: { account } })
     } catch (err: any) {
         if (err instanceof InsufficientBalanceError) {
             return res.status(400).json({ status: 'error', message: err.message, data: null })
         }
-        
+
         if (err instanceof AccountNotFoundError) {
             return res.status(404).json({ status: 'error', message: err.message, data: null })
         }
