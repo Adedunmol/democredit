@@ -21,4 +21,4 @@ class Karma {
     }
 }
 
-export default new Karma(process.env.ADJUTOR_API_KEY!!)
+export default new Karma(process.env.ADJUTOR_SECRET_KEY!!)
