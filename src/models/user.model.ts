@@ -13,7 +13,7 @@ class User {
             ...data
         }).returning('id')
 
-        const accountId = await accountModel.createAccount({ user_id: id })
+        const accountId = await accountModel.createAccount({ userId: id })
 
         return { userId: id, accountId }
     }

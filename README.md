@@ -60,13 +60,13 @@ git clone https://github.com/Adedunmol/democredit.git
 - [ ] **Authentication not required**
 
 ### User related
-- [ ] [Register](): `POST api/v1/auth/register/`
-- [ ] [Login](): `POST api/v1/auth/login/`
+- [ ] [Register](src/docs/register.md): `POST api/v1/auth/register/`
+- [ ] [Login](src/docs/login.md): `POST api/v1/auth/login/`
 
 ### Account related
-- [x] [Fund account](): `POST api/v1/accounts/fund/`
-- [x] [Transfer funds](): `POST api/v1/accounts/transfer/`
-- [x] [Withdraw funds](): `POST api/v1/accounts/withdraw/`
+- [x] [Fund account](src/docs/fund-account.md): `POST api/v1/accounts/fund/`
+- [x] [Transfer funds](src/docs/transfer-funds.md): `POST api/v1/accounts/transfer/`
+- [x] [Withdraw funds](src/docs/withdraw.md): `POST api/v1/accounts/withdraw/`
 
 ### Future Improvements
 1. Add a Swagger.yaml file to document the APIs
