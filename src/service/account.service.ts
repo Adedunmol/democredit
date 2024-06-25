@@ -1,4 +1,4 @@
-import { InsuffucientBalanceError } from "../errors/insufficient-balance"
+import { InsufficientBalanceError, AccountNotFoundError, ForbiddenError } from "../errors/account"
 import accountModel from "../models/account.model"
 
 class AccountService {
@@ -20,12 +20,12 @@ class AccountService {
     
         const account = await accountModel.getAccount(senderAccountId)
 
-        if (!account) throw new Error('No account with this account id')
+        if (!account) throw new AccountNotFoundError()
 
-        if (account.user_id !== senderUserId) throw new Error('Account does not belong to sender')
+        if (account.user_id !== senderUserId) throw new ForbiddenError()
     
         // custom error insufficient balance
-        if (amount > account.balance) throw new InsuffucientBalanceError()
+        if (amount > account.balance) throw new InsufficientBalanceError()
     
         return accountModel.transferFunds({ senderAccountId, recipientAccountId, amount })
     }
@@ -35,11 +35,11 @@ class AccountService {
     
         const account = await accountModel.getAccount(account_id)
         
-        if (!account) throw new Error('No account with this account id')
+        if (!account) throw new AccountNotFoundError()
 
-        if (account.user_id !== senderUserId) throw new Error('Account does not belong to sender')
+        if (account.user_id !== senderUserId) throw new ForbiddenError()
     
-        if (amount > account.balance) throw new InsuffucientBalanceError()
+        if (amount > account.balance) throw new InsufficientBalanceError()
     
         return accountModel.withdrawFunds({ account_id, amount })
     }
