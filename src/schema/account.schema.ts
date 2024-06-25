@@ -10,7 +10,8 @@ export const fundAccountSchema = object({
 
 export const transferFundsSchema = object({
     body: object({
-        recipientUserId: number({ required_error: 'recipientUserId is required' }),
+        recipientAccountId: number({ required_error: 'recipientAccountId is required' }),
+        senderAccountId: number({ required_error: 'senderAccountId is required' }),
         amount: number({ required_error: 'amount to be transferred is required' }).positive('amount to be transferred cannot be negative')
     })
 })

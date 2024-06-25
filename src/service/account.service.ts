@@ -16,14 +16,18 @@ class AccountService {
     }
 
     async transferFunds(data: any) {
-        const { senderUserId, recipientUserId, amount } = data
+        const { senderAccountId, recipientAccountId, amount, senderUserId } = data
     
-        const account = await accountModel.getAccount(senderUserId)
+        const account = await accountModel.getAccount(senderAccountId)
+
+        if (!account) throw new Error('No account with this account id')
+
+        if (account.user_id !== senderUserId) throw new Error('Account does not belong to sender')
     
         // custom error insufficient balance
-        if (account && amount > account.balance) throw new InsuffucientBalanceError()
+        if (amount > account.balance) throw new InsuffucientBalanceError()
     
-        return accountModel.transferFunds({ senderUserId, recipientUserId, amount })
+        return accountModel.transferFunds({ senderAccountId, recipientAccountId, amount })
     }
 
     async withdrawFunds(data: any) {
