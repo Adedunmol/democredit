@@ -1,11 +1,11 @@
 import db from "../database/database";
 
 interface CreateAccount {
-    user_id: number
+    userId: number
 }
 
 interface FundAccount {
-    account_id: number
+    accountId: number
     amount: number
 }
 
@@ -16,19 +16,19 @@ interface FundTransfer {
 }
 
 interface WithdrawFunds {
-    account_id: number
+    accountId: number
     amount: number
 }
 
 class Account {
     async createAccount(data: CreateAccount) {
-        const [id] = await db('account').insert({ ...data, balance: 0 }).returning('id')
+        const [id] = await db('account').insert({ user_id: data.userId, balance: 0 }).returning('id')
 
         return id
     }
 
     async fundAccount(data: FundAccount) {
-        const account = await db('account').increment('balance', data.amount).where({ id: data.account_id }).returning('*')
+        const account = await db('account').increment('balance', data.amount).where({ id: data.accountId }).returning('*')
 
         return account
     }
@@ -47,7 +47,7 @@ class Account {
 
     async withdrawFunds(data: WithdrawFunds) {
         // account id instead
-        const account = await db('account').decrement('balance', data.amount).where({ id: data.account_id }).returning('*')
+        const account = await db('account').decrement('balance', data.amount).where({ id: data.accountId }).returning('*')
 
         return account
     }

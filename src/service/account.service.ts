@@ -4,15 +4,15 @@ import accountModel from "../models/account.model"
 class AccountService {
 
     createAccount(data: any) {
-        const { userId: user_id } = data
+        const { userId } = data
     
-        return accountModel.createAccount({ user_id })
+        return accountModel.createAccount({ userId })
     }
 
     fundAccount(data: any) {
-        const { accountId: account_id, amount } = data
+        const { accountId, amount } = data
     
-        return accountModel.fundAccount({ account_id, amount })
+        return accountModel.fundAccount({ accountId, amount })
     }
 
     async transferFunds(data: any) {
@@ -31,9 +31,9 @@ class AccountService {
     }
 
     async withdrawFunds(data: any) {
-        const { accountId: account_id, amount, senderUserId } = data
+        const { accountId, amount, senderUserId } = data
     
-        const account = await accountModel.getAccount(account_id)
+        const account = await accountModel.getAccount(accountId)
         
         if (!account) throw new AccountNotFoundError()
 
@@ -41,7 +41,7 @@ class AccountService {
     
         if (amount > account.balance) throw new InsufficientBalanceError()
     
-        return accountModel.withdrawFunds({ account_id, amount })
+        return accountModel.withdrawFunds({ accountId, amount })
     }
 }
 
