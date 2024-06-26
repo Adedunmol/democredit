@@ -29,7 +29,8 @@ To register a new user
 ```bash
 {
     "data": {
-        "id": 1
+        "userId": 10,
+        "accountId": 5
     },
     "message": "",
     "status": "success"
