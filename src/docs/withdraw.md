@@ -9,7 +9,7 @@ To withdraw funds from account
 
 ## Request body
 
-**Required fields:** `amount`, `accountId`
+**Required fields:** `amount`, `accountId`, `bankAccountNumber`, `bank`
 
 **Optional fields:** 
 
@@ -17,7 +17,9 @@ To withdraw funds from account
 ```bash
 { 
     "amount": 100, 
-    "accountId": 2
+    "accountId": 4,
+    "bankAccountNumber": "1234567890",
+    "bank": "test bank"
 }
 ```
 
@@ -30,7 +32,10 @@ To withdraw funds from account
     "status": "success",
     "message": "withdraw successful",
     "data": {
-        
+        "account": {
+            "id": 4,
+            "balance": "5570.00"
+        }
     }
 }
 ```
