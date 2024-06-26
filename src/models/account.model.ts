@@ -42,8 +42,9 @@ class Account {
             // account id instead
             const sender = await trx('account').decrement('balance', data.amount).where({ id: data.senderAccountId }).returning('*')
             const receiver = await trx('account').increment('balance', data.amount).where({ id: data.recipientAccountId }).returning('*')
+            const updatedSenderAccount = trx('account').select('id', 'balance').where({ id: data.senderAccountId }).first()
 
-            return sender
+            return updatedSenderAccount
         })
 
         return sender
