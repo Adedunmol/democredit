@@ -12,9 +12,9 @@ export const createUserController = async (req: Request<{}, {}, CreateUserInput[
             return res.status(400).json({ status: 'error', message: 'this user has been blacklisted', data: null })
         }
 
-        const id = await createUserService(req.body)
+        const userData = await createUserService(req.body)
 
-        return res.status(201).json({ status: 'success', message: '',  data: { id } })
+        return res.status(201).json({ status: 'success', message: '',  data: { ...userData } })
     } catch (err: any) {
 
         if (err && err.code === 'ER_DUP_ENTRY') {
