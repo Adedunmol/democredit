@@ -28,7 +28,11 @@ class Account {
     }
 
     async fundAccount(data: FundAccount) {
-        const account = await db('account').increment('balance', data.amount).where({ id: data.accountId }).returning('*')
+        const account = await db.transaction(async trx => {
+            const account = await trx('account').increment('balance', data.amount).where({ id: data.accountId })
+            const updatedAccount = trx('account').select('id', 'balance').where({ id: data.accountId }).first()
+            return updatedAccount
+        })
 
         return account
     }
@@ -46,14 +50,18 @@ class Account {
     }
 
     async withdrawFunds(data: WithdrawFunds) {
-        // account id instead
-        const account = await db('account').decrement('balance', data.amount).where({ id: data.accountId }).returning('*')
+        const account = await db.transaction(async trx => {
+            const account = await trx('account').decrement('balance', data.amount).where({ id: data.accountId }).returning('*')
+            const updatedAccount = trx('account').select('id', 'balance').where({ id: data.accountId }).first()
+
+            return updatedAccount
+        })
 
         return account
     }
 
-    async getAccount(userId: number) {
-        const account = db('account').where({ user_id: userId }).returning('*').first()
+    async getAccount(accountId: number) {
+        const account = db('account').where({ id: accountId }).returning('*').first()
 
         return account
     }
