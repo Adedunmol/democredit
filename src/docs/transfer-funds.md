@@ -31,7 +31,10 @@ To transfer funds from one account to another
     "status": "success",
     "message": "transaction successful",
     "data": {
-        
+        "account": {
+            "id": 4,
+            "balance": "5670.00"
+        }
     }
 }
 ```
