@@ -30,7 +30,10 @@ To fund an account
     "status": "success",
     "message": "account funded successfully",
     "data": {
-        
+        "account": {
+            "id": 4,
+            "balance": "6060.00"
+        }
     }
 }
 ```
