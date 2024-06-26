@@ -1,4 +1,4 @@
-import { object, TypeOf, number } from 'zod';
+import { object, TypeOf, number, string } from 'zod';
 
 
 export const fundAccountSchema = object({
@@ -18,6 +18,8 @@ export const transferFundsSchema = object({
 
 export const withdrawFundsSchema = object({
     body: object({
+        bankAccountNumber: string({ required_error: 'bankAccountNumber to wthdraw to is required' }),
+        bank: string({ required_error: 'bank to wthdraw to is required' }),
         accountId: number({ required_error: 'accountId is required' }),
         amount: number({ required_error: 'amount to be withdrawn is required' }).positive('amount to be withdrawn cannot be negative')
     })
