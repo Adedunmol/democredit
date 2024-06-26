@@ -152,7 +152,7 @@ describe('account', () => {
                 const userPayload = { id: 1, email: 'test@email.com', username: 'test_username' }
                 const token = jwt.sign({ UserInfo: { ...userPayload }}, process.env.ACCESS_TOKEN_SECRET as string, { expiresIn: '15m' })
 
-                const payload = { amount: 150, accountId: 1 }
+                const payload = { amount: 150, accountId: 1, bank: 'test bank', bankAccountNumber: '1234567890' }
 
                 const { statusCode } = await supertest(app).post('/api/v1/accounts/withdraw').send(payload).set('Authorization', `Bearer ${token}`)
 
@@ -170,7 +170,7 @@ describe('account', () => {
                 const userPayload = { id: 1, email: 'test@email.com', username: 'test_username' }
                 const token = jwt.sign({ UserInfo: { ...userPayload }}, process.env.ACCESS_TOKEN_SECRET as string, { expiresIn: '15m' })
 
-                const payload = { amount: 150, accountId: 1 }
+                const payload = { amount: 150, accountId: 1, bank: 'test bank', bankAccountNumber: '1234567890' }
 
                 const { statusCode } = await supertest(app).post('/api/v1/accounts/withdraw').send(payload).set('Authorization', `Bearer ${token}`)
 
@@ -191,7 +191,7 @@ describe('account', () => {
                 const userPayload = { id: 1, email: 'test@email.com', username: 'test_username' }
                 const token = jwt.sign({ UserInfo: { ...userPayload }}, process.env.ACCESS_TOKEN_SECRET as string, { expiresIn: '15m' })
 
-                const payload = { amount: 100, accountId: 1 }
+                const payload = { amount: 100, accountId: 1, bank: 'test bank', bankAccountNumber: '1234567890' }
 
                 const { statusCode } = await supertest(app).post('/api/v1/accounts/withdraw').send(payload).set('Authorization', `Bearer ${token}`)
 
